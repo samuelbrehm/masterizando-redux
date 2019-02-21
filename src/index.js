@@ -1,15 +1,13 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 
-import { View } from 'react-native';
-
 import store from './store';
 
-// import styles from './styles';
+import Routes from './routes';
 
 const App = () => (
   <Provider store={store}>
-    <View style={{ backgroundColor: '#FFF', flex: 1 }} />
+    <Routes />
   </Provider>
 );
 
