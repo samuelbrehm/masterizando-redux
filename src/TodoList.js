@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -23,7 +24,7 @@ const styles = StyleSheet.create({
 const TodoList = ({ todos, addTodo }) => (
   <View style={styles.container}>
     {todos.map(todo => (
-      <Text>{todo}</Text>
+      <Text key={todo.id}>{todo.text}</Text>
     ))}
     <TouchableOpacity
       onPress={() => {
@@ -34,6 +35,16 @@ const TodoList = ({ todos, addTodo }) => (
     </TouchableOpacity>
   </View>
 );
+
+TodoList.propTypes = {
+  todos: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      text: PropTypes.string,
+    }),
+  ).isRequired,
+  addTodo: PropTypes.func.isRequired,
+};
 
 const mapStateToProps = state => ({
   todos: state.todos,
