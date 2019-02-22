@@ -2,35 +2,35 @@ import { StyleSheet } from 'react-native';
 import { colors, metrics } from '~/styles';
 
 const styles = StyleSheet.create({
-  container: {
-    backgroundColor: colors.white,
-    padding: metrics.basePadding,
-    borderRadius: metrics.borderRadius,
-    marginTop: metrics.basePadding,
-    marginHorizontal: metrics.basePadding,
-    flexDirection: 'row',
-    alignItems: 'center',
+  avatar: {
+    height: 54,
+    width: 54,
   },
 
-  avatar: {
-    width: 54,
-    height: 54,
+  container: {
+    alignItems: 'center',
+    backgroundColor: colors.white,
+    borderRadius: metrics.borderRadius,
+    flexDirection: 'row',
+    marginHorizontal: metrics.basePadding,
+    marginTop: metrics.basePadding,
+    padding: metrics.basePadding,
+  },
+
+  description: {
+    color: colors.dark,
+    fontSize: 12,
+    marginTop: 3,
   },
 
   info: {
-    marginLeft: metrics.baseMargin,
     flex: 1,
+    marginLeft: metrics.baseMargin,
   },
 
   title: {
     color: colors.darker,
     fontWeight: 'bold',
-  },
-
-  description: {
-    color: colors.dark,
-    marginTop: 3,
-    fontSize: 12,
   },
 });
 
