@@ -1,18 +1,44 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 import {
   View, StatusBar, Text, TextInput, TouchableOpacity, SafeAreaView,
 } from 'react-native';
 
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as FavoriteActions from '~/store/actions/favorites';
+
 import styles from './styles';
 
-export default class Main extends Component {
+class Main extends Component {
   static navigationOptions = {
     header: null,
   };
 
+  static propTypes = {
+    navigation: PropTypes.shape({
+      navigate: PropTypes.func,
+    }).isRequired,
+    addFavoriteRequest: PropTypes.func.isRequired,
+  };
+
+  state = {
+    repoNameInput: '',
+  };
+
   navigateToFavorites = () => {
-    this.props.navigation.navigate('Favorites');
+    const { navigation } = this.props;
+    navigation.navigate('Favorites');
+  };
+
+  addRepository = () => {
+    const { repoNameInput } = this.state;
+    const { addFavoriteRequest } = this.props;
+
+    if (!repoNameInput) return;
+
+    addFavoriteRequest(repoNameInput);
   };
 
   render() {
@@ -33,9 +59,15 @@ export default class Main extends Component {
               autoCorrect={false}
               placeholder="usuário/repositório"
               underlineColorAndroid="transparent"
+              value={this.state.repoNameInput}
+              onChangeText={repoNameInput => this.setState({ repoNameInput })}
             />
 
-            <TouchableOpacity style={styles.button} onPress={() => {}} activeOpacity={0.6}>
+            <TouchableOpacity
+              style={styles.button}
+              onPress={this.addRepository}
+              activeOpacity={0.6}
+            >
               <Text style={styles.buttonText}>Adicionar aos favoritos</Text>
             </TouchableOpacity>
           </View>
@@ -50,3 +82,10 @@ export default class Main extends Component {
     );
   }
 }
+
+const mapDispatchToProps = dispatch => bindActionCreators(FavoriteActions, dispatch);
+
+export default connect(
+  null,
+  mapDispatchToProps,
+)(Main);
