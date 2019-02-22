@@ -4,6 +4,10 @@ import { View } from 'react-native';
 
 // import styles from './styles';
 
-const Favorites = () => <View style={{ backgroundColor: '#ACDC', flex: 1 }} />;
+const Favorites = () => <View />;
+
+Favorites.navigationOptions = {
+  title: 'Meus Favoritos',
+};
 
 export default Favorites;
